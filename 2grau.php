@@ -28,13 +28,18 @@ $b = $_POST["edt2"];
 $c = $_POST["edt3"];
 
 $delta= ($b*$b) - ((4*$a)*$c);
-echo $delta;
+
 $x1= (($b*-1)+(sqrt($delta)))/2*$a;
 $x2= (($b*-1)-(sqrt($delta)))/2*$a;
 
 if (isset($a)&&isset($b)&&isset($c))
 {
-  echo "<br>O valor de x1 é $x1<br>";
+  echo"<br>Passo a Passo<br>";
+  echo"Δ = b²-4 *a*c<br>";
+  echo"Δ = $b ² -4* $a * $c <br><br>";
+  echo "Resultado";
+  echo "<br>O valor de delta é $delta<br>";
+  echo "O valor de x1 é $x1<br>";
   echo "O valor de x2 é $x2";
 }
 
