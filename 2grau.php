@@ -1,10 +1,13 @@
 <!Doctype html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="mng.css">
 <meta charset="utf-8"/>
 </head>
 
 <body>
+<h1>Snizer Cramer - 2 Grau</h1>
+<h2>Calcula equação do segundo grau</h2>
 
   <table>
      <tr>
@@ -12,12 +15,10 @@
        <td><input type="number" name="edt1" id="a"  value="" ><b> x²&nbsp</font></b></td>
        <td><input type="number" name="edt2" id="b" value=""><b> x&nbsp</b></font></td>
        <td><input type="number" name="edt3" id="c" value=""><b> = 0</b></font></td>
-
-
-
     </tr>
 
   </table>
+  <br>
   <input type="submit" name="btn">
  </form>
 <?php
