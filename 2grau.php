@@ -20,15 +20,17 @@
   </table>
   <br>
   <input type="submit" name="btn">
+  <br>
  </form>
 <?php
 $a = $_POST["edt1"];
 $b = $_POST["edt2"];
 $c = $_POST["edt3"];
 
-$delta= pow($b,2)*4*$a*$c;
-$x1= (($b*-1)+sqrt($delta))/4*$a;
-$x2= (($b*-1)-sqrt($delta))/4*$a;
+$delta= ($b*$b) - ((4*$a)*$c);
+echo $delta;
+$x1= (($b*-1)+(sqrt($delta)))/2*$a;
+$x2= (($b*-1)-(sqrt($delta)))/2*$a;
 
 if (isset($a)&&isset($b)&&isset($c))
 {
