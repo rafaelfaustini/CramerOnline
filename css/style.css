@@ -1,0 +1,11 @@
+body {
+  background: #2ecc71; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #1E8BC3, #1E8BC3);
+  background: -moz-linear-gradient(right, #1E8BC3, #1E8BC3);
+  background: -o-linear-gradient(right, #1E8BC3, #1E8BC3);
+  background: linear-gradient(to left, #1E8BC3, #1E8BC3);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-left:15px;
+  color: #fff;
+}
