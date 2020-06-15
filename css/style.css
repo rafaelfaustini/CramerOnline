@@ -25,6 +25,89 @@ body{
   padding: 10px 5px;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .7s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.md-select, .md-select:active, .md-select:hover, .md-select:focus{
+  font-family: inherit;
+  background-color: transparent;
+  color: rgba(0,0,0, 0.26);
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid rgba(0,0,0, 0.12);
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+}
+.md-select:after{
+  position: absolute;
+  top: 0.75em;
+  right: 0.5em;
+  /* Styling the down arrow */
+  width: 0;
+  height: 0;
+  padding: 0;
+  content: '';
+  border-left: .25em solid transparent;
+  border-right: .25em solid transparent;
+  border-top: 0.375em solid rgba(0,0,0, 0.12);
+  pointer-events: none;
+}
+.md-select:focus{
+  outline:none;
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgb(19, 117, 228);
+}
+.input-group{
+  position: relative;
+}
+.input-group label{
+  position: absolute;
+  display: block;
+  height:400px
+}
+input{
+  outline: none;
+}
+.input-group input{
+  background-color: transparent;
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid rgba(0,0,0, 0.12);
+}
+.input-group label{
+  top: 10px;
+  transition: .3s ease-in-out;
+  color:rgba(0,0,0, 0.12);
+}
+.input-group input:active, .input-group input:focus{
+  background-color: transparent;
+  outline: 0 !important;
+  border: none;
+  border-bottom: 1px solid rgb(19, 117, 228);
+}
+input:valid,
+input:focus {
+  border-bottom: 2px solid rgb(19, 117, 228);  
+}
+input:valid + label,
+input:focus + label {
+  display:block;
+  top: -16px;
+  pointer-events: none;
+  color: rgb(19, 117, 228);
+}
+
+
 @media (prefers-color-scheme: dark) {
   body{
     background-color: #1e1e1e
@@ -40,6 +123,25 @@ body{
     color:transparent;
     -webkit-text-stroke-width: .9px;
     -webkit-text-stroke-color: white;
+  }
+  .md-select, .md-select:active, .md-select:hover, .md-select:focus{
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline:none !important;
+  }
+  .md-select option{
+    color: #1e1e1e
+  }
+  .md-select:after{
+    border-top: 0.375em solid white
+  }
+  .input-group label{
+    color: white;
+  }
+  .input-group input{
+    border-bottom: 1px solid white;
+    color:white !important;
   }
 }
 

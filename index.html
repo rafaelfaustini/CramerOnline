@@ -3,41 +3,109 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Snizer Online - Simplifique seus cálculos</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet" async>
     <link href="css/snizer-font.min.css" rel="stylesheet" async>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" async>
     <link rel='stylesheet' type='text/css' media='screen' href='css/libs/bootstrap/bootstrap.min.css' async>
     <link rel='stylesheet' type='text/css' media='screen' href='css/style.css' async>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="appVue">
         <h1 class="logo font-weight-light center-mobile"><i class="icon-snizer"></i> <span>Cramer</span></h1>
-        <h2 class="text-primary text-center mt-4">Vamos começar</h2>
-        <h4 class="text-primary font-weight-light text-center">Escolha a funcionalidade desejada</h4>
-        <div class="row mt-8 justify-content-center">
-            <div class="col-md-3">
-                <div class="card sombra mb-4 mb-md-0">
-                    <div class="card-body">
-                        <h5 class="card-title">Equações <ion-icon name="calculator"></ion-icon></h5>
-                        <p class="card-text">Solucione e confira passo a passo equações de primeiro e segundo grau de forma simples e prática</p>
-                        <button class="btn btn-secondary px-8 not-rounded sombra">Veja mais</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card sombra">
-                    <div class="card-body">       
-                        <h5 class="card-title">Sistemas Lineares <ion-icon name="calculator"></ion-icon></h5>
-                        <p class="card-text">Resolver passo a passo sistemas lineares (2x2) e (3x3) se tornou mais fácil do que nunca.</p>
-                        <button class="btn btn-secondary px-8 not-rounded sombra">Veja mais</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+        <transition name="fade" mode="out-in">
+            <div id="menuSelecao" v-if="seletor==0" :key="seletor">
+                <h2 class="text-primary text-center mt-4">Vamos começar</h2>
+                <h4 class="text-primary font-weight-light text-center">Escolha a funcionalidade desejada</h4>
+                <div class="row mt-8 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card sombra mb-4 mb-md-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Equações</h5>
+                                <p class="card-text">Solucione e confira passo a passo equações de primeiro e segundo grau de forma simples e prática</p>
+                                <button class="btn btn-secondary px-8 not-rounded sombra" @click="trocaPagina(1)">Veja mais</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card sombra">
+                            <div class="card-body">       
+                                <h5 class="card-title">Sistemas Lineares</h5>
+                                <p class="card-text">Resolva e veja passo a passo sistemas lineares (2x2) e (3x3) de modo ágil e eficiente</p>
+                                <button class="btn btn-secondary px-8 not-rounded sombra" @click="trocaPagina(2)">Veja mais</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </transition>
+        <transition name="fade" mode="out-in" >
+            <div id="equacoes" v-if="seletor==1" :key="seletor">
+                <div class="row mt-8 justify-content-center">
+                    <div class="col-md-10">
+                        <div class="card sombra mb-4 mb-md-0">
+                            <div 
+                            :class="{
+                                    'card-header': true,
+                                    'bg-primary': parseInt(seletorEquacao),
+                                    'bg-secondary': !parseInt(seletorEquacao)
+                                    }">
+                                <i class="fas fa-calculator"></i> Resolver {{seletorEquacaoTxt}}
+                            </div>
+                            <div class="card-body">
+                                <select class="form-control md-select mb-7" v-model="seletorEquacao" @change="selecionaEquacao()">
+                                    <option selected value="0"><i class="fas fa-calculator"></i> ax + bx = c</option>
+                                    <option value="1"><i class="fas fa-calculator"></i> ax² + bx = c</option>
+                                </select>
+                                <transition name="fade">
+                                    <h3 class="text-center my-8" v-show="previewEquacao">{{previewEquacao}}</h3>
+                                </transition>
+                                
+                                <div class="row">
+                                    <div class="col-md-5 input-group my-3">
+                                        <input class="form-control" v-model="a" pattern=".+" required>
+                                        <label>Coeficiente a</label>
+                                    </div>
+                                    <div class="col-md-5 input-group my-3">
+                                        <input class="form-control" v-model="b" pattern=".+" required>
+                                        <label>Coeficiente b</label>
+                                    </div>
+                                    <div class="col-md-5 input-group my-3">
+                                        <input class="form-control" v-model="c" pattern=".+" required>
+                                        <label>Coeficiente c</label>
+                                    </div>
+                                    <transition name="fade">
+                                        <div class="col-md-15" v-show="resultadoEquacao">
+                                            <hr>
+                                            <button class="btn btn-secondary px-8 not-rounded sombra mb-4" data-toggle="collapse" data-target="#demo">Passo a passo</button>
+
+                                            <div id="demo" class="collapse">
+                                                <div v-for="passo in resultado.passos">
+                                                    <h6>{{passo.titulo}}</h6>
+                                                    <p>{{passo.operacao}}</p>
+                                                </div>
+                                            </div>
+                                            <h4>{{resultadoEquacao}}</h4>
+                                        </div>
+                                    </transition>
+                                    <div class="col-md-15 mt-7">
+                                        <button class="btn btn-primary px-8 not-rounded sombra float-right" :disabled="!disabledEquacao" @click="calcularEquacao()">Calcular</button>
+                                        <button class="btn btn-outline-primary px-8 not-rounded sombra float-right mx-3" @click="voltarEquacoes()">Voltar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </transition>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="js/libs/bootstrap/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
         <script src='js/main.js'></script>
+        
     </div>
 </body>
 </html>
