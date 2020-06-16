@@ -82,9 +82,10 @@
                                             <button class="btn btn-secondary px-8 not-rounded sombra mb-4" data-toggle="collapse" data-target="#demo">Passo a passo</button>
 
                                             <div id="demo" class="collapse">
-                                                <div v-for="passo in resultado.passos">
-                                                    <h6>{{passo.titulo}}</h6>
-                                                    <p>{{passo.operacao}}</p>
+                                                <div v-for="(passo,index) in resultado.passos">
+                                                    <h5 v-if="passo.categoria">{{passo.categoria || ''}}</h5>
+                                                    <h6 class="ml-3">{{passo.titulo}}</h6>
+                                                    <p class="ml-6">{{passo.operacao}}</p>
                                                 </div>
                                             </div>
                                             <h4>{{resultadoEquacao}}</h4>
