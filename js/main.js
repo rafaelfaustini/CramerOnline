@@ -4,9 +4,17 @@
             seletor: 0,
             seletorEquacao: 0,
             seletorEquacaoTxt: 'equação do primeiro grau',
+            seletorSistemas: 0,
+            seletorSistemasTxt: 'sistema linear 2x2',
             a: null,
             b: null,
             c: null,
+            d: null,
+            e: null,
+            f: null,
+            g: null,
+            h: null,
+            i: null,
             preview: false,
             resultado: {
                 valor: null,
@@ -40,6 +48,17 @@
                         break;
                     case "1":
                         this.seletorEquacaoTxt = 'equação do segundo grau';
+                        break
+                }
+            },
+            selecionaSistema(){
+                this.limparSistema();
+                switch(this.seletorEquacao){
+                    case "0":
+                        this.seletorEquacaoTxt = 'sistema linear 2x2';
+                        break;
+                    case "1":
+                        this.seletorEquacaoTxt = 'sistema linear 3x3';
                         break
                 }
             },
@@ -104,6 +123,17 @@
                 this.c = null;
                 this.resultado = {valor: null, passos: null};
             },
+            limparSistema(){
+                this.a = null;
+                this.b = null;
+                this.c = null;
+                this.d = null;
+                this.e = null;
+                this.f = null;
+                this.g = null;
+                this.h = null;
+                this.resultado = {valor: null, passos: null};
+            },
             voltarEquacoes(){
                 if(!this.resultado.valor){
                     this.trocaPagina(0)
@@ -134,7 +164,7 @@
                 return !isNaN(parseFloat(this.a)) && !isNaN(parseFloat(this.b)) && !isNaN(parseFloat(this.c))
             },
             resultadoEquacao(){
-                if(!isNaN(parseFloat(this.resultado.valor)) || Array.isArray(this.resultado.valor) || typeof this.resultado.valor === 'string'){
+                if(!isNaN(parseFloat(this.resultado.valor)) || Array.isArray(this.resultado.valor) || typeof this.resultado.valor === 'string' && this.seletor==1){
                 switch(parseInt(this.seletorEquacao)){
                     case 0:
                         return `X = ${this.resultado.valor}`
